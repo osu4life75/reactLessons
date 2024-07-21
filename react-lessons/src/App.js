@@ -1,32 +1,17 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom/client';
-import NavBar from './components/NavBar';
-import Menu from './components/Menu';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import CardGrid from './components/Body';
+import PokemonDetail from './PokemonDetail';
 
-
-function App() {
-  // Define state
-  const [shoppingCart, setShoppingCart] = useState([
-    { id: 1, item: 'Apple', quantity: 3 },
-    { id: 2, item: 'Banana', quantity: 2 },
-  ]);
-
-  // Function to add an item to the shopping cart
-  const addItem = (item) => {
-    setShoppingCart([...shoppingCart, item]);
-  };
-
-  // Function to remove an item from the shopping cart
-  const removeItem = (itemId) => {
-    setShoppingCart(shoppingCart.filter((item) => item.id !== itemId));
-  };
-
+const App = () => {
   return (
-    <div>
-      <NavBar shoppingCart={shoppingCart} />
-      <Menu addItem={addItem} removeItem={removeItem} />
-    </div>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<CardGrid />} />
+        <Route path="/pokemon/:id" element={<PokemonDetail />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
